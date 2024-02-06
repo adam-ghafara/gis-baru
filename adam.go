@@ -566,3 +566,22 @@ func PostCenter(mongoenv, dbname, collname string, r *http.Request) string {
 
 	return ReturnStruct(response)
 }
+
+func PostCenterSphere(mongoenv, dbname, collname string, r *http.Request) string {
+	var coordinate Point
+	var response Pesan
+	response.Status = false
+	mconn := SetConnection2dsphere(mongoenv, dbname, collname)
+
+	err := json.NewDecoder(r.Body).Decode(&coordinate)
+
+	if err != nil {
+		response.Message = "Error parsing application/json: " + err.Error()
+		return ReturnStruct(response)
+	}
+
+	response.Status = true
+	response.Message = CenterSphere(mconn, collname, coordinate)
+
+	return ReturnStruct(response)
+}
