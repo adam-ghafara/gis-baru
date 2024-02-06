@@ -8,7 +8,9 @@ Kelas : 3C
 Push and Publish Repo Tags
 ```sh
 go get -u all
-go mod tidy
+go mod tidy                             # Tidy golang
+git add .                               # Add Files
+git commit -m "Commit Here"             # Commit Data
 git tag                                 #check current version
 git tag v1.0.0                         #set tag version
 git push origin --tags                  #push tag version to repo
